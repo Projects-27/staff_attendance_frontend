@@ -1,0 +1,171 @@
+*{
+font-family: var(--font-mont_serrat);
+
+}
+.form {
+  max-width: 500px;
+  padding: 3rem 4rem;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  transform: translate(-50% , -50%);
+  background-color: white;
+  border-radius: 3rem;
+}
+
+.input.standard{
+  border: none !important;
+  outline: none !important;
+  border-radius: 5rem !important;
+}
+
+.login_bg{
+  min-height: 100vh;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='800' viewBox='0 0 200 200'%3E%3Cdefs%3E%3ClinearGradient id='a' gradientUnits='userSpaceOnUse' x1='88' y1='88' x2='0' y2='0'%3E%3Cstop offset='0' stop-color='%23005092'/%3E%3Cstop offset='1' stop-color='%23007cc4'/%3E%3C/linearGradient%3E%3ClinearGradient id='b' gradientUnits='userSpaceOnUse' x1='75' y1='76' x2='168' y2='160'%3E%3Cstop offset='0' stop-color='%23868686'/%3E%3Cstop offset='0.09' stop-color='%23ababab'/%3E%3Cstop offset='0.18' stop-color='%23c4c4c4'/%3E%3Cstop offset='0.31' stop-color='%23d7d7d7'/%3E%3Cstop offset='0.44' stop-color='%23e5e5e5'/%3E%3Cstop offset='0.59' stop-color='%23f1f1f1'/%3E%3Cstop offset='0.75' stop-color='%23f9f9f9'/%3E%3Cstop offset='1' stop-color='%23FFFFFF'/%3E%3C/linearGradient%3E%3Cfilter id='c' x='0' y='0' width='200%25' height='200%25'%3E%3CfeGaussianBlur in='SourceGraphic' stdDeviation='12' /%3E%3C/filter%3E%3C/defs%3E%3Cpolygon fill='url(%23a)' points='0 174 0 0 174 0'/%3E%3Cpath fill='%23000' fill-opacity='.5' filter='url(%23c)' d='M121.8 174C59.2 153.1 0 174 0 174s63.5-73.8 87-94c24.4-20.9 87-80 87-80S107.9 104.4 121.8 174z'/%3E%3Cpath fill='url(%23b)' d='M142.7 142.7C59.2 142.7 0 174 0 174s42-66.3 74.9-99.3S174 0 174 0S142.7 62.6 142.7 142.7z'/%3E%3C/svg%3E");
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  background-position: top left;
+}
+
+.navBar{
+  position: fixed;
+  top: 0;
+  left: 0;
+  /* box-shadow: 0 2rem 3rem 0 rgba(50, 50, 93, 0.25); */
+  width:100%;
+  display: flex;
+  gap:3rem;
+  align-items: center;
+  padding:1rem 5%;
+  justify-content: space-between;
+  height: 4rem;
+  z-index: 2;
+}
+
+.taskCard{
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
+  /* background: linear-gradient(180deg, #3730A3 6.77%, #F9CCCC 100%); */
+  /* color: white; */
+  padding: 3rem;
+  border-radius: 3rem;
+}
+
+
+.admin_bar,.admin_content{
+  top: 4rem ;
+  padding:3rem 1rem;
+}
+.admin_bar{
+  position: fixed;
+  left: 0;
+  width: 200px;
+}
+.admin_content{
+  position: absolute;
+  right: 0;
+  height: 100%;
+  width:calc(100% - 200px)
+}
+
+.admin_sidebar{
+  position: fixed;
+  top: 80px;
+  width:250px;
+  height: calc(100% - 80px);
+  left: 0; 
+  padding: 1rem 2rem;
+}
+.admin_content{
+  position: absolute;
+  top: 80px;
+  right: 0;
+  width: calc(100% - 250px);
+  padding: 1rem;
+}
+.stats_card{
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
+  padding: 1rem;
+  border-radius: 2rem;
+}
+
+.my_card{
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px !important;
+}
+.t_card{
+  padding:2rem;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
+  border-radius: 3rem;
+}
+
+
+/* loader */
+
+.loader_container{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.3);
+  z-index: 30;
+}
+.loading-ellipsis {
+  display: inline-block;
+  position: relative;
+  width: 80px;
+  height: 80px;
+}
+.loading-ellipsis div {
+  position: absolute;
+  top: 33px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #2d9bbd;
+  animation-timing-function: cubic-bezier(0, 1, 1, 0);
+}
+.loading-ellipsis div:nth-child(1) {
+  left: 8px;
+  animation: loading-ellipsis1 0.4s infinite;
+}
+.loading-ellipsis div:nth-child(2) {
+  left: 8px;
+  animation: loading-ellipsis2 0.4s infinite;
+}
+.loading-ellipsis div:nth-child(3) {
+  left: 32px;
+  animation: loading-ellipsis2 0.4s infinite;
+}
+.loading-ellipsis div:nth-child(4) {
+  left: 56px;
+  animation: loading-ellipsis3 0.4s infinite;
+}
+@keyframes loading-ellipsis1 {
+  0% {
+    transform: scale(0);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+@keyframes loading-ellipsis3 {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(0);
+  }
+}
+@keyframes loading-ellipsis2 {
+  0% {
+    transform: translate(0, 0);
+  }
+  100% {
+    transform: translate(24px, 0);
+  }
+}
