@@ -7,20 +7,20 @@ import Icon from 'funuicss/component/Icon'
 import Link from 'next/link'
 import { logOut } from '@/Functions/Functions'
 
-export default function AdminSideBar() {
+export default function AdminSideBar({active}) {
   return (
     <div className='admin_sidebar'>
         <List>
       <ListItem>
           <Link href='/'>
-          <Button rounded fullWidth startIcon={<Icon icon='bx bx-chart'/>} funcss={`text-left ${ "lighter"} sideBarLink`}>
+          <Button rounded fullWidth startIcon={<Icon icon='bx bx-chart'/>} funcss={`${active == 'dashboard' ? 'card' : ''} text-left ${ "lighter"} sideBarLink`}>
           Dashboard
           </Button>
           </Link>
          </ListItem>
       <ListItem>
           <Link href='/'>
-          <Button rounded fullWidth startIcon={<Icon icon='bx bx-user'/>} funcss={`text-left ${ "lighter"} sideBarLink`}>
+          <Button rounded fullWidth startIcon={<Icon icon='bx bx-user'/>} funcss={`${active == 'staff' ? 'card' : ''} text-left ${ "lighter"} sideBarLink`}>
           Staff
           </Button>
           </Link>

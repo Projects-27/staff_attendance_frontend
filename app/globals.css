@@ -77,6 +77,9 @@ font-family: var(--font-mont_serrat);
   left: 0; 
   padding: 1rem 2rem;
 }
+.sideBarLink{
+  margin: 0.9rem 0;
+}
 .admin_content{
   position: absolute;
   top: 80px;

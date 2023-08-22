@@ -75,7 +75,7 @@ export default function Admin() {
   return (
     <div>
       <Nav />
-      <AdminSideBar />
+      <AdminSideBar active={'dashboard'} />
       <div className="admin_content">
         <div className="container">
         <Typography
