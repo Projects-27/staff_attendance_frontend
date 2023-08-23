@@ -12,14 +12,14 @@ export default function AdminSideBar({active}) {
     <div className='admin_sidebar'>
         <List>
       <ListItem>
-          <Link href='/'>
+          <Link href='/admin'>
           <Button rounded fullWidth startIcon={<Icon icon='bx bx-chart'/>} funcss={`${active == 'dashboard' ? 'card' : ''} text-left ${ "lighter"} sideBarLink`}>
           Dashboard
           </Button>
           </Link>
          </ListItem>
       <ListItem>
-          <Link href='/'>
+          <Link href='/staffs'>
           <Button rounded fullWidth startIcon={<Icon icon='bx bx-user'/>} funcss={`${active == 'staff' ? 'card' : ''} text-left ${ "lighter"} sideBarLink`}>
           Staff
           </Button>

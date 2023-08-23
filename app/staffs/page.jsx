@@ -218,11 +218,29 @@ maxWidth="600px"
                <RowFlex justify='space-between'>
                <input type="text" placeholder='Staff Id | Name' className='input' onChange={ (e) => (setsearch(e.target.value)) }/>
 
-               <div>
+               <div className='row-flex' style={{gap:'1rem'}}>
                 <button className="secondary  button"   onClick={()=>setcreate_staff(true)}>
                   Create Staff
                 </button>
+                <div className='h2'>
+               { docs &&
+                docs.filter( doc => {
+                    if(search){
+                        if(
+                            search.toString().trim().toLowerCase().includes(doc.staff_id.toString().trim().toLowerCase().slice(0 , search.length))
+                            ||
+                            search.toString().trim().toLowerCase().includes(doc.username.toString().trim().toLowerCase().slice(0 , search.length))
+                            ){
+                                return doc
+                        }
+                    }else{
+                        return docs
+                    }
+                } ).length
+                }
+                </div>
                </div>
+          
                </RowFlex>
               </div>
             <table className='table stripped text-small'>

@@ -13,10 +13,10 @@ export default function Admin() {
   const [today_docs , set_today_docs] = useState('')
   const [this_month_docs , set_this_month_docs] = useState('')
   const [this_year_docs , set_this_year_docs] = useState('')
-
+  const [search, setsearch] = useState('')
   const [year , setyear] = useState('')
   const [month ,setmonth] = useState('')
-  const [day ,setday] = useState('')
+  const [date ,setdate] = useState('')
 
   // yearly
   useEffect(() => {
@@ -51,7 +51,7 @@ export default function Admin() {
   })
   // daily
   useEffect(() => {
-    if(!this_month_docs && this_year_docs){
+    if(!today_docs && this_year_docs){
       var locale = "en-us";
       var today = new Date();
       var day = today.getDate();
@@ -61,7 +61,8 @@ export default function Admin() {
       let this_month = month ? month : longMonth.toString().length == 1 ? `0${longMonth}` : longMonth.toString().length
       let this_day = day ? day : today.getDate().length == 1 ? `0${today.getDate()}` : today.getDate()
 
-      let url = EndPoint + '/attendances/daily/' + `${this_year}-${this_month}-${this_day}`;
+      let url = date ? EndPoint + '/attendances/daily/' + `${date}` :  EndPoint + '/attendances/daily/' + `${this_year}-${this_month}-${this_day}`
+      console.log(date)
       FunRequest.get(`${url}`)
       .then( (res) => {
         set_today_docs(res.data)
@@ -70,7 +71,22 @@ export default function Admin() {
     }
   })
 
-
+  const HandlePrint = ()=>{
+    const myElement = document.getElementById('documents');
+    printElement(myElement);
+    function printElement(element) {
+        const originalContents = document.body.innerHTML;
+        const printContents = element.innerHTML;
+  
+        document.body.innerHTML = printContents;
+        window.print();
+  
+        document.body.innerHTML = originalContents;
+  
+  
+    }
+    
+  }
   
   return (
     <div>
@@ -87,7 +103,7 @@ export default function Admin() {
         <div className="margin-top-40">
           <div className="row">
             <div className="col sm-12 md-4 lg-4 padding">
-              <select name="" className='input full-width' id="">
+              {/* <select name="" className='input full-width' id="">
                 <option value="">All days</option>
                 <option value="today">Today</option>
                 <option value="1">1</option>
@@ -122,7 +138,7 @@ export default function Admin() {
 <option value="30">30</option>
 <option value="31">31</option>
 
-              </select>
+              </select> */}
               <div className="stats_card">
                 <div className="text-small">Today</div>
                 <div className="margin-top-10">
@@ -135,7 +151,7 @@ export default function Admin() {
               </div>
             </div>
             <div className="col sm-12 md-4 lg-4 padding">
-            <select name="" className='input full-width' id="">
+            {/* <select name="" className='input full-width' id="">
                 <option value="">All Months</option>
                 <option value="currentmonth">This Month</option>
                 <option value="Jan">Jan</option>
@@ -150,9 +166,7 @@ export default function Admin() {
 <option value="Oct">Oct</option>
 <option value="Nov">Nov</option>
 <option value="Dec">Dec</option>
-
-
-              </select>
+              </select> */}
               <div className="stats_card">
                 <div className="text-small">Month</div>
                 <div className="margin-top-10">
@@ -165,9 +179,9 @@ export default function Admin() {
               </div>
             </div>
             <div className="col sm-12 md-4 lg-4 padding">
-            <input type='number' className='input full-width' id=""
+            {/* <input type='number' className='input full-width' id=""
              min="1900" max="5099" step="1" placeholder="Enter a year" required
-            />
+            /> */}
               <div className="stats_card">
                 <div className="text-small">Year</div>
                 <div className="margin-top-10">
@@ -184,15 +198,39 @@ export default function Admin() {
             <div className="t_card">
               <div className="padding">
                <RowFlex justify='space-between'>
+                <input className='input' type='date' onChange={ (e) => {
+                  set_today_docs("")
+                  setdate(e.target.value) 
+                } } />
                <input type="text" placeholder='Staff Id | Name' className='input' />
 
-               <div>
-                <button className="primary roundBtn button">
-                  Print data
+               <div  className='row-flex' style={{gap:'1rem'}}>
+                <button className="secondary roundBtn button" onClick={HandlePrint}>
+                  Print data <i className='bx bx-printer' />
                 </button>
+                <div className='h2'>
+                {
+                  today_docs &&
+                  today_docs.filter( doc => {
+                    if(search){
+                        if(
+                            search.toString().trim().toLowerCase().includes(doc.staff_id.toString().trim().toLowerCase().slice(0 , search.length))
+                            ||
+                            search.toString().trim().toLowerCase().includes(doc.username.toString().trim().toLowerCase().slice(0 , search.length))
+                            ){
+                                return doc
+                        }
+                    }else{
+                        return today_docs
+                    }
+                } ).length
+                }
+              </div>
                </div>
+        
                </RowFlex>
               </div>
+              <div id="documents">
             <table className='table stripped text-small'>
               <thead>
                 <th>Staff Id</th>
@@ -204,11 +242,24 @@ export default function Admin() {
               </thead>
               <tbody>
               { today_docs &&
-                today_docs.map(res => (
+                today_docs.filter( doc => {
+                  if(search){
+                      if(
+                          search.toString().trim().toLowerCase().includes(doc.staff_id.toString().trim().toLowerCase().slice(0 , search.length))
+                          ||
+                          search.toString().trim().toLowerCase().includes(doc.username.toString().trim().toLowerCase().slice(0 , search.length))
+                          ){
+                              return doc
+                      }
+                  }else{
+                      return today_docs
+                  }
+              } )
+                .map(res => (
 <tr key={res.id}>
     <td>{res.staff.staff_id}</td>
     <td>{res.staff.username}</td>
-    <td>{res.staff.staff_id}</td>
+    <td>{res.staff.department}</td>
     <td>{res.date.split('-').reverse().join('-')}</td>
     <td>{res.reporting_time}</td>
     <td>{res.time_staff_closes}</td>
@@ -218,6 +269,7 @@ export default function Admin() {
               </tbody>
 
             </table>
+            </div>
             </div>
           </div>
         </div>

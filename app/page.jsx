@@ -29,9 +29,15 @@ const Submit = () => {
             'user',
             JSON.stringify(res.data)
           )
-          resolve()
+          resolve(res.data.role)
         })
-        .then( () => window.location.assign("/home") )
+        .then( (resRole) => {
+          if(resRole == 'admin'){
+            window.location.assign("/admin")
+          }else{
+            window.location.assign("/home")
+          }
+        } )
       }else{
         seterror({
           title:res.status ,
